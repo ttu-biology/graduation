@@ -1,2 +1,1 @@
-# seminar-eeb
 # graduation
