@@ -156,6 +156,10 @@
   -->
 <!-- removes that annoying 9-column preset -->
 <script>
+  debugger
+  if (location.protocol !== 'https:' && location.href !== "localhost") {
+    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+  }
   document.querySelector("div.large-9.columns.large-centered").setAttribute('class', "")
   document.querySelector(".standard-content > div").setAttribute('class', "")
 </script>
