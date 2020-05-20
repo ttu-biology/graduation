@@ -39,11 +39,48 @@ export class Display {
     return [portraitImgTags, landscapeImgTags];
   }
 
+  get buildRow() {
+    const row = document.createElement('div');
+    row.classList.add('grid-row');
+    return row;
+  }
+
+  get buildGridColumn() {
+    const gridColumn = document.createElement('div');
+    gridColumn.classList.add('grid-column');
+    return gridColumn;
+  }
+
+  get buildRow2() {
+    const row2 = document.createElement('div');
+    row2.classList.add('grid-row-2');
+    return row2;
+  }
+
+  get buildGridColumn2() {
+    const gridColumn2 = document.createElement('div');
+    gridColumn2.classList.add('grid-column-2');
+    return gridColumn2;
+  }
+
+
   buildImgGrid(json) {
+    const main = document.getElementById('main-content');
+    const row = this.buildRow;
+    const gridColumn = this.buildGridColumn;
+    const row2 = this.buildRow2;
+    const gridColumn2 = this.buildGridColumn2;
+
+
     const [portraitImgTags, landscapeImgTags] = this.collectImgTags(json);
 
     console.table(portraitImgTags.map((tag) => tag.src));
     console.table(landscapeImgTags.map((tag) => tag.src));
+    console.log(main);
+    console.log(row);
+    console.log(gridColumn);
+    console.log(row2);
+    console.log(gridColumn2);
   }
 
   get getImgList(){
