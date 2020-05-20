@@ -51,13 +51,20 @@ export class Display {
     return gridColumn;
   }
 
-  get buildRow2() {
+  buildRow2(gC2ImgArr) {
+    // gC2ImgArr = [["l-img1", "l-img2", "p-img3"], ["p-img4", "l-img5", "l-img6"]] 
     const row2 = document.createElement('div');
     row2.classList.add('grid-row-2');
+
+    for(const imageArr of gC2ImgArr){
+      const gridColumn2 = this.buildGridColumn2(imageArr);
+      row2.appendChild(gridColumn2);
+    }
     return row2;
   }
 
   buildGridColumn2(images) {
+    // image = ["l-img1", "l-img2", "p-img3"]
     const gridColumn2 = document.createElement('div');
     gridColumn2.classList.add('grid-column-2');
     
@@ -73,7 +80,6 @@ export class Display {
     const main = document.getElementById('main-content');
     const row = this.buildRow;
     const gridColumn = this.buildGridColumn;
-    const row2 = this.buildRow2;
 
 
     const [portraitImgTags, landscapeImgTags] = this.collectImgTags(json);
@@ -83,10 +89,9 @@ export class Display {
     console.log(main);
     console.log(row);
     console.log(gridColumn);
-    console.log(row2);
 
-    const gridColumn2 = this.buildGridColumn2(portraitImgTags);
-    console.log(gridColumn2);
+    const row2 = this.buildRow2([portraitImgTags.slice(0,3), portraitImgTags.slice(3,6)]);
+    console.log(row2);
   }
 
   get getImgList(){
