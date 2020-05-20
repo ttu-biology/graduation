@@ -39,9 +39,39 @@ export class Display {
     return [portraitImgTags, landscapeImgTags];
   }
 
-  get buildRow() {
+  prepNestedImgArr(portraitImgTags, landscapeImgTags) {
+    const [p, l] = [portraitImgTags, landscapeImgTags];
+    const numGridColumns = portraitImgTags.length / 2;
+    const nestedImgs = [];
+    
+    for(let i = 0; i < numGridColumns; i++){
+      let zeroZero = [];
+      let zeroOne = [];
+
+      zeroZero.push(l.pop());
+      zeroZero.push(l.pop());
+      zeroZero.push(p.pop());
+
+      zeroOne.push(p.pop());
+      zeroOne.push(l.pop());
+      zeroOne.push(l.pop());
+
+      nestedImgs.push([[zeroZero, zeroOne], l.pop()]);
+    }
+
+    return nestedImgs;
+  }
+
+  buildRow(portraitImgTags, landscapeImgTags) {
     const row = document.createElement('div');
     row.classList.add('grid-row');
+    const imgTagArrs = this.prepNestedImgArr(portraitImgTags, landscapeImgTags);
+
+    for(let i = 0; i < imgTagArrs.length; i++){
+      const gridColumn = this.buildGridColumn(imgTagArrs[i], i);
+      row.appendChild(gridColumn);
+    }
+
     return row;
   }
 
@@ -88,18 +118,12 @@ export class Display {
 
 
   buildImgGrid(json) {
-    const main = document.getElementById('main-content');
-    const row = this.buildRow;
-
     const [portraitImgTags, landscapeImgTags] = this.collectImgTags(json);
 
-    console.table(portraitImgTags.map((tag) => tag.src));
-    console.table(landscapeImgTags.map((tag) => tag.src));
-    console.log(main);
-    console.log(row);
+    const main = document.getElementById('main-content');
+    const row = this.buildRow(portraitImgTags, landscapeImgTags);
 
-    const gridColumn = this.buildGridColumn([[portraitImgTags.slice(0,3), portraitImgTags.slice(3,6)],portraitImgTags[7]], 0);
-    console.log(gridColumn);
+    main.appendChild(row);
   }
 
   get getImgList(){
