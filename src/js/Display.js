@@ -18,7 +18,7 @@ export class Display {
     return imgTag;
   }
   
-  buildImgTags(json) {
+  collectImgTags(json) {
     const [portraitImg, landscapeImg] = [Display.shuffle(json.portrait), Display.shuffle(json.landscape)];
     const portraitImgTags = portraitImg.map((filename) => this.buildImgTag(filename));
     const landscapeImgTags = landscapeImg.map((filename) => this.buildImgTag(filename));
@@ -27,7 +27,7 @@ export class Display {
   }
 
   buildImgGrid(json) {
-    const [portraitImgTags, landscapeImgTags] = this.buildImgTags(json);
+    const [portraitImgTags, landscapeImgTags] = this.collectImgTags(json);
     console.table(portraitImgTags.map((tag) => tag.src));
     console.table(landscapeImgTags.map((tag) => tag.src));
   }
