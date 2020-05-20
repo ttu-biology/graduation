@@ -57,9 +57,14 @@ export class Display {
     return row2;
   }
 
-  get buildGridColumn2() {
+  buildGridColumn2(images) {
     const gridColumn2 = document.createElement('div');
     gridColumn2.classList.add('grid-column-2');
+    
+    for(const image of images){
+      gridColumn2.appendChild(image);
+    }
+
     return gridColumn2;
   }
 
@@ -69,7 +74,6 @@ export class Display {
     const row = this.buildRow;
     const gridColumn = this.buildGridColumn;
     const row2 = this.buildRow2;
-    const gridColumn2 = this.buildGridColumn2;
 
 
     const [portraitImgTags, landscapeImgTags] = this.collectImgTags(json);
@@ -80,6 +84,8 @@ export class Display {
     console.log(row);
     console.log(gridColumn);
     console.log(row2);
+
+    const gridColumn2 = this.buildGridColumn2(portraitImgTags);
     console.log(gridColumn2);
   }
 
