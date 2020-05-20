@@ -45,9 +45,20 @@ export class Display {
     return row;
   }
 
-  get buildGridColumn() {
+  buildGridColumn(gR2ImgArr, parityBit) {
+    // gR2ImgArr = [[["l-img1", "l-img2", "p-img3"], ["p-img4", "l-img5", "l-img6"]], "l-img7"]
     const gridColumn = document.createElement('div');
+    const row2 = this.buildRow2(gR2ImgArr[0]);
     gridColumn.classList.add('grid-column');
+
+    if ( Display.even(parityBit) ) {
+      gridColumn.appendChild(row2)
+      gridColumn.appendChild(gR2ImgArr[1])
+    }else{
+      gridColumn.appendChild(gR2ImgArr[1])
+      gridColumn.appendChild(row2)
+    }
+
     return gridColumn;
   }
 
@@ -79,8 +90,6 @@ export class Display {
   buildImgGrid(json) {
     const main = document.getElementById('main-content');
     const row = this.buildRow;
-    const gridColumn = this.buildGridColumn;
-
 
     const [portraitImgTags, landscapeImgTags] = this.collectImgTags(json);
 
@@ -88,10 +97,9 @@ export class Display {
     console.table(landscapeImgTags.map((tag) => tag.src));
     console.log(main);
     console.log(row);
-    console.log(gridColumn);
 
-    const row2 = this.buildRow2([portraitImgTags.slice(0,3), portraitImgTags.slice(3,6)]);
-    console.log(row2);
+    const gridColumn = this.buildGridColumn([[portraitImgTags.slice(0,3), portraitImgTags.slice(3,6)],portraitImgTags[7]], 0);
+    console.log(gridColumn);
   }
 
   get getImgList(){
@@ -100,6 +108,10 @@ export class Display {
             .then(json => {
               this.buildImgGrid(json);
             });
+  }
+
+  static even(parityBit) {
+    return (parityBit % 2 === 0) ? true : false
   }
 
   // randomly shuffles an array in n time
