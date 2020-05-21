@@ -78,6 +78,17 @@
 <!--  %#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%#%# --> 
 
                      <!-- article to be populated with seminars -->
+                     <article id="graduation-message">
+                       <div class="zak-message"><h2>Congratulations to our outstanding May 2020 Graduates in Biology.</h2>
+                         <p>Best wishes to you from the faculty, staff, TAs and your colleagues and friends. Great Stuff!</p>
+                       </div>
+                       <div class="zak-video">
+                         <video width="500" height="889" preload=metadata autoplay=false controls poster="src/img/zak.png">
+                           <source src="src/video/zak.mov" type="video/mp4">
+                           Your browser does not support this video tag
+                         </video>
+                       </div>
+                     </article>
                      <main id="main-content"></main>
   <!--
   <main class="main-content">
@@ -156,9 +167,6 @@
   -->
 <!-- removes that annoying 9-column preset -->
 <script>
-  if (location.protocol !== 'https:' && location.href !== "localhost") {
-    location.replace(`https:${location.href.substring(location.protocol.length)}`);
-  }
   document.querySelector("div.large-9.columns.large-centered").setAttribute('class', "")
   document.querySelector(".standard-content > div").setAttribute('class', "")
 </script>
